@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        applicationId "androidstack.wanandroid"
+        minSdkVersion 15
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //Cannot inline bytecode built with JVM target 1.8 into bytecode that is being built with JVM target 1.6
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+    /**
+     * kotlin coroutines
+     */
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7'
+    /**
+     * 网络请求封装
+     */
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    /**
+     * gson 数据转换器
+     */
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
+
+    /**
+     * live data
+     */
+    implementation "androidx.lifecycle:lifecycle-livedata:2.2.0"
+    /**
+     * view model
+     */
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    /**
+     * lifecycle
+     */
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    /**
+     * glide图片加载框架
+     */
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+}
